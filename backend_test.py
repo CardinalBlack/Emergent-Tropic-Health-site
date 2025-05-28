@@ -106,7 +106,12 @@ class DrLauryAPITester:
             "POST",
             "payments/create-checkout",
             200,
-            data={"origin_url": origin_url}
+            data={
+                "amount": 19.0,
+                "currency": "usd",
+                "product_name": "Dr. Laury Masters Subscription",
+                "origin_url": origin_url
+            }
         )
         if success and 'session_id' in response:
             self.session_id = response['session_id']
