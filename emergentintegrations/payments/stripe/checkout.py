@@ -33,12 +33,12 @@ class StripeCheckout:
                 line_items=[
                     {
                         "price_data": {
-                            "currency": "usd",
+                            "currency": request.currency,
                             "product_data": {
-                                "name": "Dr. Laury Masters ND-AI Monthly Subscription",
+                                "name": request.product_name,
                                 "description": "Access to AI naturopathic doctor consultation",
                             },
-                            "unit_amount": 1900,  # $19.00
+                            "unit_amount": int(request.amount * 100),  # Convert to cents
                             "recurring": {
                                 "interval": "month",
                             },
