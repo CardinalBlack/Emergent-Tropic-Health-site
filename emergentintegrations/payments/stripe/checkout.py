@@ -60,7 +60,7 @@ class StripeCheckout:
         except Exception as e:
             raise Exception(f"Error creating checkout session: {str(e)}")
 
-    async def get_session_status(self, session_id: str) -> CheckoutStatusResponse:
+    async def get_checkout_status(self, session_id: str) -> CheckoutStatusResponse:
         """Get the status of a checkout session"""
         try:
             session = stripe.checkout.Session.retrieve(
