@@ -4,6 +4,9 @@ import os
 from typing import Optional, Dict, Any
 
 class CheckoutSessionRequest(BaseModel):
+    amount: float
+    currency: str
+    product_name: str
     origin_url: str
 
 class CheckoutSessionResponse(BaseModel):
