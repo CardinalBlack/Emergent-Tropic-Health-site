@@ -1,38 +1,296 @@
-.App {
-    text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for the AI Naturopathic Doctor site */
+:root {
+  --primary-color: #7c2d93;
+  --secondary-color: #b83280;
+  --accent-color: #dc2626;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --background-light: #fef7ff;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: linear-gradient(135deg, #fef7ff 0%, #f3e8ff 100%);
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.App-link {
-    color: #61dafb;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(124, 45, 147, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(124, 45, 147, 0.6);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Custom gradient backgrounds */
+.bg-primary-gradient {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.bg-hero-gradient {
+  background: linear-gradient(135deg, #fef7ff 0%, #f3e8ff 50%, #ede9fe 100%);
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-purple-700 to-pink-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply bg-white text-purple-700 border-2 border-purple-700 font-semibold py-3 px-8 rounded-full hover:bg-purple-700 hover:text-white transition-all duration-300;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(124, 45, 147, 0.2);
+}
+
+/* Interactive elements */
+.mouse-follow {
+  position: relative;
+  overflow: hidden;
+}
+
+.mouse-follow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 45, 147, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mouse-follow:hover::before {
+  opacity: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+/* Form styles */
+.form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(124, 45, 147, 0.1);
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid rgba(124, 45, 147, 0.1);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Chat bubble styles */
+.chat-bubble-user {
+  @apply bg-purple-700 text-white rounded-lg rounded-br-none p-4 ml-12 mb-4;
+}
+
+.chat-bubble-ai {
+  @apply bg-white text-gray-800 rounded-lg rounded-bl-none p-4 mr-12 mb-4 shadow-md;
+}
+
+/* Natural medicine themed decorations */
+.leaf-decoration {
+  position: relative;
+}
+
+.leaf-decoration::before {
+  content: '🌿';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+/* Medical cross animation */
+.medical-cross {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: var(--accent-color);
+}
+
+.medical-cross::before,
+.medical-cross::after {
+  content: '';
+  position: absolute;
+  background-color: var(--accent-color);
+}
+
+.medical-cross::before {
+  width: 6px;
+  height: 20px;
+  left: 7px;
+  top: 0;
+}
+
+.medical-cross::after {
+  width: 20px;
+  height: 6px;
+  left: 0;
+  top: 7px;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .text-6xl {
+    font-size: 3rem;
+  }
+  
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+  
+  .text-4xl {
+    font-size: 2rem;
+  }
+}
+
+/* Custom hero section */
+.hero-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(124, 45, 147, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(184, 50, 128, 0.1) 0%, transparent 50%);
+}
+
+/* Testimonial cards */
+.testimonial-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Feature icons with glow effect */
+.feature-icon {
+  filter: drop-shadow(0 0 10px rgba(124, 45, 147, 0.3));
+}
+
+/* Pricing card special effects */
+.pricing-popular {
+  position: relative;
+  transform: scale(1.05);
+  border: 2px solid var(--primary-color);
+}
+
+.pricing-popular::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: white;
+  padding: 5px 20px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Interactive hover states */
+.interactive-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Natural elements styling */
+.natural-border {
+  border-image: linear-gradient(45deg, #10b981, #059669) 1;
+}
+
+/* Doctor avatar with professional styling */
+.doctor-avatar {
+  border: 4px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+  border-radius: 50%;
+}
+
+/* Custom focus states for accessibility */
+.focus-visible:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
