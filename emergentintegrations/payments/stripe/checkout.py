@@ -16,6 +16,7 @@ class CheckoutSessionResponse(BaseModel):
 
 class CheckoutStatusResponse(BaseModel):
     status: str
+    payment_status: str = "pending"
     customer_email: Optional[str] = None
     subscription_id: Optional[str] = None
     subscription_status: Optional[str] = None
