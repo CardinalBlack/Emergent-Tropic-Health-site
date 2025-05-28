@@ -6,8 +6,9 @@ from typing import Optional, Dict, Any
 class CheckoutSessionRequest(BaseModel):
     amount: float
     currency: str
-    product_name: str
-    origin_url: str
+    success_url: str
+    cancel_url: str
+    metadata: Dict[str, Any]
 
 class CheckoutSessionResponse(BaseModel):
     session_id: str
@@ -35,7 +36,7 @@ class StripeCheckout:
                         "price_data": {
                             "currency": request.currency,
                             "product_data": {
-                                "name": request.product_name,
+                                "name": "Dr. Laury Masters ND-AI Monthly Subscription",
                                 "description": "Access to AI naturopathic doctor consultation",
                             },
                             "unit_amount": int(request.amount * 100),  # Convert to cents
@@ -47,8 +48,9 @@ class StripeCheckout:
                     }
                 ],
                 mode="subscription",
-                success_url=f"{request.origin_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}",
-                cancel_url=f"{request.origin_url}/payment-cancelled",
+                success_url=request.success_url,
+                cancel_url=request.cancel_url,
+                metadata=request.metadata
             )
             
             return CheckoutSessionResponse(
