@@ -70,7 +70,8 @@ class StripeCheckout:
             )
             
             response = CheckoutStatusResponse(
-                status=session.status
+                status=session.status,
+                payment_status=session.payment_status if hasattr(session, 'payment_status') else session.status
             )
             
             if session.customer:
